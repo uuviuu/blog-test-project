@@ -14,5 +14,3 @@ RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/inst
 RUN npm install -g npm@10.3.0
 
 RUN export DOCKER_SCAN_SUGGEST=false
-
-EXPOSE 3000
