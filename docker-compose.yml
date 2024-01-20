@@ -1,0 +1,72 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    container_name: nginx-blog
+    volumes:
+      - ./hosts:/etc/nginx/conf.d
+      - ./www:/var/www
+      - ./logs:/var/log/nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    networks:
+      - blog-test-project
+
+  php:
+    build: php
+    restart: always
+    container_name: php-blog
+    volumes:
+      - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./www:/var/www
+    networks:
+      - blog-test-project
+
+  nodejs:
+    build: node
+    restart: always
+    container_name: nodejs-blog
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./app:/home/app
+    networks:
+      - blog-test-project
+
+  postgres:
+    image: postgres
+    container_name: postgres-blog
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./db/postregs:/var/lib/postgresql
+      - ./db/dumps:/dumps
+      - ./logs:/var/log/postgresql/
+    ports:
+      - "5432:5432"
+    networks:
+      - blog-test-project
+
+  redis:
+    image: redis
+    container_name: redis-blog
+    ports:
+      - "6379:6379"
+    command: ["sh", "-c", "exec redis-server --requirepass \"redis\""]
+    networks:
+      - blog-test-project
+
+networks:
+  blog-test-project:
+    driver: bridge
+
+volumes:
+  db:
+  node_modules:
