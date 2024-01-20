@@ -1,25 +1,49 @@
-FROM php:8.1.7-fpm
+FROM php:8.2-fpm
 
-RUN apt-get update && apt-get install -y \
-      apt-utils \
-      libpq-dev \
-      libpng-dev \
-      libzip-dev \
-      libyaml-dev \
-      zip unzip \
-      git \
-      fish \
-      redis \
-      && pecl install yaml \
-      && pecl install redis \
-      && docker-php-ext-enable redis
+RUN apt update && apt install -y \
+        curl \
+        wget \
+        git \
+        unzip \
+        zip \
+        libxml2-dev \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libonig-dev \
+        libpng-dev \
+        libwebp-dev \
+        libicu-dev \
+        libpq-dev \
+        libxpm-dev \
+        libwebp-dev \
+        libvpx-dev \
+        libzip-dev \
+        libyaml-dev \
+        fish \
+        redis \
+    && pecl install yaml \
+    && pecl install xdebug \
+    && pecl install redis \
+    && docker-php-ext-enable yaml\
+    && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable redis
 
 RUN set -eux; \
-    docker-php-ext-install  \
-      pdo_mysql \
-      bcmath \
-      gd \
-      zip
+    docker-php-ext-install soap; \
+    docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-xpm --with-webp; \
+    docker-php-ext-configure soap --enable-soap; \
+    docker-php-ext-configure intl; \
+    docker-php-ext-configure zip; \
+    docker-php-ext-install -j "$(nproc)" iconv \
+        mbstring \
+        gd \
+        intl \
+        sockets \
+        zip \
+        pgsql \
+        pdo_pgsql \
+        pcntl \
+        exif
 
 RUN chsh -s /usr/bin/fish
 

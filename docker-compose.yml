@@ -43,7 +43,7 @@ services:
     image: postgres
     container_name: postgres-blog
     environment:
-      POSTGRES_DB: postgres
+      POSTGRES_DB: blog
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
