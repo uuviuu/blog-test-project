@@ -1,9 +1,14 @@
 FROM node:18
 
 RUN apt-get update && apt-get install -y \
-    nano \
-    mc \
-    zsh
+        curl \
+        git \
+        fish \
+        nano \
+        mc \
+        zsh
+
+RUN chsh -s /usr/bin/fish
 
 COPY --from=spiralscout/roadrunner:2.9.1 /usr/bin/rr /usr/bin/rr
 
