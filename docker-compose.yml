@@ -34,10 +34,11 @@ services:
     ports:
       - "8080:8080"
       - "8000:8000"
+      - "3000:3000"
     stdin_open: true
     tty: true
     volumes:
-      - ./app:/home/app
+      - ./app:/var/app
     networks:
       - blog-test-project
 
