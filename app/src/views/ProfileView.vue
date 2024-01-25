@@ -10,12 +10,12 @@
         <form class="form">
           <div class="input-field">
             <input
-                id="description"
-                type="text"
+              id="description"
+              type="text"
             >
             <label for="description">Имя</label>
             <span
-                class="helper-text invalid">name</span>
+              class="helper-text invalid">name</span>
           </div>
 
           <button class="btn waves-effect waves-light" type="submit">

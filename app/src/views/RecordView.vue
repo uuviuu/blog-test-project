@@ -20,10 +20,10 @@
           <p>
             <label>
               <input
-                  class="with-gap"
-                  name="type"
-                  type="radio"
-                  value="income"
+                class="with-gap"
+                name="type"
+                type="radio"
+                value="income"
               />
               <span>Доход</span>
             </label>
@@ -32,10 +32,10 @@
           <p>
             <label>
               <input
-                  class="with-gap"
-                  name="type"
-                  type="radio"
-                  value="outcome"
+                class="with-gap"
+                name="type"
+                type="radio"
+                value="outcome"
               />
               <span>Расход</span>
             </label>
@@ -43,8 +43,8 @@
 
           <div class="input-field">
             <input
-                id="amount"
-                type="number"
+              id="amount"
+              type="number"
             >
             <label for="amount">Сумма</label>
             <span class="helper-text invalid">amount пароль</span>
@@ -52,12 +52,12 @@
 
           <div class="input-field">
             <input
-                id="description"
-                type="text"
+              id="description"
+              type="text"
             >
             <label for="description">Описание</label>
             <span
-                class="helper-text invalid">description пароль</span>
+              class="helper-text invalid">description пароль</span>
           </div>
 
           <button class="btn waves-effect waves-light" type="submit">

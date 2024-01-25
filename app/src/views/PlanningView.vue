@@ -17,8 +17,8 @@
             </p>
             <div class="progress">
               <div
-                  class="determinate green"
-                  style="width:40%"
+                class="determinate green"
+                style="width:40%"
               ></div>
             </div>
           </div>

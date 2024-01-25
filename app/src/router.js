@@ -1,52 +1,59 @@
-import { createWebHistory, createRouter } from "vue-router"
-import Home from '@/views/HomeView.vue'
+import {createWebHistory, createRouter} from "vue-router"
 
 const routes = [
-    {
-        path: '/',
-        name: 'home',
-        component: Home,
-    },
-    {
-        path: '/register',
-        name: 'register',
-        component: () => import('@/views/RegisterView.vue'),
-    },
-    {
-        path: '/login',
-        name: 'login',
-        component: () => import('@/views/LoginView.vue'),
-    },
-    {
-        path: '/profile',
-        name: 'profile',
-        component: () => import('@/views/ProfileView.vue'),
-    },
-    {
-        path: '/categories',
-        name: 'categories',
-        component: () => import('@/views/CategoryView.vue'),
-    },
-    {
-        path: '/history',
-        name: 'history',
-        component: () => import('@/views/HistoryView.vue'),
-    },
-    {
-        path: '/planning',
-        name: 'planning',
-        component: () => import('@/views/PlanningView.vue'),
-    },
-    {
-        path: '/record',
-        name: 'record',
-        component: () => import('@/views/RecordView.vue'),
-    },
+  {
+    path: '/',
+    name: 'home',
+    meta: {layout: 'home'},
+    component: () => import('@/views/HomeView'),
+  },
+  {
+    path: '/register',
+    name: 'register',
+    meta: {layout: 'register'},
+    component: () => import('@/views/RegisterView'),
+  },
+  {
+    path: '/login',
+    name: 'login',
+    meta: {layout: 'login'},
+    component: () => import('@/views/LoginView'),
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    meta: {layout: 'profile'},
+    component: () => import('@/views/ProfileView'),
+  },
+  {
+    path: '/categories',
+    name: 'categories',
+    meta: {layout: 'categories'},
+    component: () => import('@/views/CategoryView'),
+  },
+  {
+    path: '/history',
+    name: 'history',
+    meta: {layout: 'history'},
+    component: () => import('@/views/HistoryView'),
+  },
+  {
+    path: '/planning',
+    name: 'planning',
+    meta: {layout: 'planning'},
+    component: () => import('@/views/PlanningView'),
+  },
+  {
+    path: '/record',
+    name: 'record',
+    meta: {layout: 'record'},
+    component: () => import('@/views/RecordView'),
+  },
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes: routes,
+  history: createWebHistory(),
+  routes: routes,
 })
 
 
