@@ -1,40 +1,34 @@
 <template>
-  <nav class="navbar orange lighten-1">
-    <div class="nav-wrapper">
-      <div class="navbar-left">
-        <a href="#">
-          <i class="material-icons black-text">dehaze</i>
-        </a>
-        <span class="black-text">12.12.12</span>
-      </div>
-
-      <ul class="right hide-on-small-and-down">
-        <li>
-          <a
-            class="dropdown-trigger black-text"
-            href="#"
-            data-target="dropdown"
-          >
-            USER NAME
-            <i class="material-icons right">arrow_drop_down</i>
-          </a>
-
-          <ul id='dropdown' class='dropdown-content'>
-            <li>
-              <router-link class="black-text" to="/profile">Профиль</router-link>
-              <i class="material-icons">account_circle</i>
-            </li>
-            <li class="divider" tabindex="-1"></li>
-            <li>
-              <a href="#" class="black-text">
-                <i class="material-icons">assignment_return</i>Выйти
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div id="nav">
+    <ul class="sidenav app-sidenav" :class="{open: modelValue}">
+      <li>
+        <router-link
+          class="waves-effect waves-orange pointer"
+          active-class="active"
+          v-for="link in links"
+          :key=link.url
+          :to=link.url>
+          {{ link.title }}
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
-<script setup>
+
+<script>
+export default {
+  props: ['modelValue'],
+  data: () => ({
+    links: [
+      {title: 'Счет', url: '/'},
+      {title: 'Новая запись', url: '/record'},
+      {title: 'История', url: '/history'},
+      {title: 'Планирование', url: '/planning'},
+      {title: 'Категории', url: '/categories'},
+      {title: 'Авторизация', url: '/login'},
+      {title: 'Регистрация', url: '/register'},
+      {title: 'Профиль', url: '/profile'},
+    ]
+  })
+}
 </script>
