@@ -6,11 +6,15 @@
 
 <script>
 import MainLayout from '@/layouts/MainLayout'
+import dateFilter from "@/filters/dateFilter";
 
 export default {
   name: 'app-base',
   components: {
     MainLayout
+  },
+  filters: {
+    'dateFilter': dateFilter
   }
 }
 </script>
