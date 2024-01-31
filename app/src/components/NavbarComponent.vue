@@ -5,7 +5,7 @@
         <a href="#">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">12.12.12</span>
+        <span class="black-text">{{ dateFilter(date) }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -14,6 +14,7 @@
             class="dropdown-trigger black-text"
             href="#"
             data-target="dropdown"
+            ref="dropdown"
           >
             USER NAME
             <i class="material-icons right">arrow_drop_down</i>
@@ -21,12 +22,13 @@
 
           <ul id='dropdown' class='dropdown-content'>
             <li>
-              <router-link class="black-text" to="/profile">Профиль</router-link>
-              <i class="material-icons">account_circle</i>
+              <router-link to="/profile" class="black-text" >
+                <i class="material-icons">account_circle</i>Профиль
+              </router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a href="#" class="black-text">
+              <a href="#" class="black-text" @click.prevent="logout">
                 <i class="material-icons">assignment_return</i>Выйти
               </a>
             </li>
@@ -36,5 +38,36 @@
     </div>
   </nav>
 </template>
-<script setup>
+
+<script>
+import M from 'materialize-css'
+import dateFilter from "../filters/dateFilter";
+
+export default {
+  data: () => ({
+    date: new Date(),
+    interval: null,
+    dropdown: null,
+  }),
+  methods: {
+    dateFilter,
+    logout() {
+      this.$router.push('/login?message=logout')
+    }
+  },
+  mounted() {
+    setInterval(() => {
+      this.date = new Date()
+    }, 1000)
+    this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
+      constrainWidth: false
+    })
+  },
+  beforeUnmount() {
+    clearInterval(this.interval)
+    if (this.dropdown && this.dropdown.destroy) {
+      this.dropdown.destroy()
+    }
+  },
+}
 </script>

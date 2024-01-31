@@ -27,7 +27,6 @@ export default {
       {title: 'Категории', url: '/categories'},
       {title: 'Авторизация', url: '/login'},
       {title: 'Регистрация', url: '/register'},
-      {title: 'Профиль', url: '/profile'},
     ]
   })
 }
