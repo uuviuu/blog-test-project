@@ -20,7 +20,9 @@ RUN apt update && apt install -y \
         libzip-dev \
         libyaml-dev \
         fish \
+        vim \
         redis \
+        mariadb-client \
     && pecl install yaml \
     && pecl install xdebug \
     && pecl install redis \
@@ -42,6 +44,9 @@ RUN set -eux; \
         zip \
         pgsql \
         pdo_pgsql \
+        mysqli \
+        opcache \
+        pdo_mysql \
         pcntl \
         exif
 

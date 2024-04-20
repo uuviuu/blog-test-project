@@ -11,15 +11,14 @@
 ## Установка
 
 - git clone https://github.com/uuviuu/blog-test-project.git - скачать репозиторий
+- docker network create blog-test-project 
 - docker-compose up -d - установить зависимости из файла docker-compose.yml
 - docker-compose exec php fish
-- cd map-info/
 - composer install
-- composer dump-autoload
 - cp .env.example .env - скопируйте и заполните файл .env в соответствии с примером
 - php artisan key:generate
 - php artisan migrate
 
 Контакты:
 [почта](mailto:my.test.laravel.message@gmail.com)
-[telegram](https://t.me/uuviuu)
+[telegram](https://t.me/wrkuuvi)

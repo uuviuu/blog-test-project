@@ -2,7 +2,7 @@ version: '3'
 services:
   nginx:
     image: nginx
-    container_name: nginx-blog
+    container_name: nginx-test
     volumes:
       - ./hosts:/etc/nginx/conf.d
       - ./www:/var/www
@@ -19,7 +19,7 @@ services:
   php:
     build: php
     restart: always
-    container_name: php-blog
+    container_name: php-test
     volumes:
       - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
       - ./php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
@@ -30,7 +30,7 @@ services:
   nodejs:
     build: node
     restart: always
-    container_name: nodejs-blog
+    container_name: node-test
     ports:
       - "8080:8080"
       - "8000:8000"
@@ -42,9 +42,18 @@ services:
     networks:
       - blog-test-project
 
+  redis:
+    image: redis
+    container_name: redis-test
+    ports:
+      - "6379:6379"
+    command: ["sh", "-c", "exec redis-server --requirepass \"redis\""]
+    networks:
+      - blog-test-project
+
   postgres:
     image: postgres
-    container_name: postgres-blog
+    container_name: postgres-test
     environment:
       POSTGRES_DB: blog
       POSTGRES_USER: postgres
@@ -58,14 +67,35 @@ services:
     networks:
       - blog-test-project
 
-  redis:
-    image: redis
-    container_name: redis-blog
-    ports:
-      - "6379:6379"
-    command: ["sh", "-c", "exec redis-server --requirepass \"redis\""]
-    networks:
-      - blog-test-project
+#  mysql:
+#    image: mysql
+#    command: --default-authentication-plugin=mysql_native_password
+#    container_name: mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: mysql
+#    ports:
+#      - 3306:3306
+#    volumes:
+#      - ./db/initdb/:/docker-entrypoint-initdb.d/
+#      - ./db/mysql:/var/lib/mysql
+#      - ./db/dumps:/dumps
+#      - ./logs:/var/log/mysql/
+
+#  mariadb:
+#    image: mariadb
+#    command: --default-authentication-plugin=mysql_native_password
+#    container_name: mariadb
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: mariadb
+#    ports:
+#      - "3307:3306"
+#    volumes:
+#      - ./db/initdb/:/docker-entrypoint-initdb.d/
+#      - ./db/mysql:/var/lib/mysql
+#      - ./db/dumps:/dumps
+#      - ./logs:/var/log/mysql/
 
 networks:
   blog-test-project:
