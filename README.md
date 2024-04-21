@@ -8,16 +8,26 @@
 - Верстка сайта на библиотеке Bootstrap
 - При разработке использовались pint и phpstan
 
-## Установка
+## Установка проекта
 
-- git clone https://github.com/uuviuu/blog-test-project.git - скачать репозиторий
-- docker network create blog-test-project 
-- docker-compose up -d - установить зависимости из файла docker-compose.yml
+- git clone https://github.com/uuviuu/blog-test-project.git 
+- docker network create blog-test-project
+- docker-compose up -d 
+
+## Установка backend
+
 - docker-compose exec php fish
 - composer install
 - cp .env.example .env - скопируйте и заполните файл .env в соответствии с примером
 - php artisan key:generate
 - php artisan migrate
+
+## Установка frontend
+
+- docker-compose exec nodejs fish
+- npm install
+- npm run build
+- npm run serve
 
 Контакты:
 [почта](mailto:my.test.laravel.message@gmail.com)
