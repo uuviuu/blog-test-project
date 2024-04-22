@@ -8,7 +8,7 @@ services:
       - ./www:/var/www
       - ./logs:/var/log/nginx
     ports:
-      - "82:80"
+      - "80:80"
     depends_on:
       - php
     networks:

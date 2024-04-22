@@ -8,11 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegistrationRequest;
 use App\Http\Resources\User\UserResource;
-use App\Providers\RouteServiceProvider;
 use App\Services\User\AuthService;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
@@ -26,7 +24,7 @@ class AuthController extends Controller
         return new UserResource(Auth::user());
     }
 
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): UserResource
     {
         /** @var LoginDto $data */
         $data = $request->dto($request->validated());
