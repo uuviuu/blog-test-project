@@ -28,6 +28,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $notifications_count
  * @property-read Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ *
  * @method static UserFactory factory($count = null, $state = [])
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
@@ -40,6 +41,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static Builder|User wherePassword($value)
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class User extends Authenticatable
@@ -54,6 +56,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
     ];
 
