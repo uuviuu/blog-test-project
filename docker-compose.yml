@@ -16,7 +16,6 @@ services:
 
   php:
     build: php
-    restart: always
     container_name: php-test
     volumes:
       - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini
@@ -27,7 +26,6 @@ services:
 
   nodejs:
     build: node
-    restart: always
     container_name: node-test
     ports:
       - "8080:8080"
