@@ -89,4 +89,9 @@ class User extends Authenticatable
 
         return $user;
     }
+
+    public function routeNotificationForNutnetSms(): ?string
+    {
+        return $this->phone;
+    }
 }

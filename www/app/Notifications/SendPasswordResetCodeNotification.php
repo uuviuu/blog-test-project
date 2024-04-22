@@ -6,6 +6,7 @@ use App\Enums\NotifyType;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Nutnet\LaravelSms\Notifications\NutnetSmsChannel;
 
 class SendPasswordResetCodeNotification extends Notification
 {
@@ -13,31 +14,31 @@ class SendPasswordResetCodeNotification extends Notification
 
     public function __construct(
         public string $code,
-        public NotifyType $authFieldValue = NotifyType::EMAIL,
+        public NotifyType $notifyType = NotifyType::EMAIL,
     ) {
     }
 
     /** @return string[] */
     public function via(): array
     {
-        return ['mail'];
+        return match ($this->notifyType) {
+            NotifyType::EMAIL => ['mail'],
+            NotifyType::PHONE => [NutnetSmsChannel::class]
+        };
     }
 
     public function toMail(): MailMessage
     {
         return (new MailMessage)
-
-            ->line('Вы запросили код для смены пароля.')
-            ->line("Код: $this->code")
-            ->action('Перейти на страницу для смены пароля', route('change-password-show'));
+            ->line(__('notification.change_password.first_line'))
+            ->line(__('notification.change_password.second_line').$this->code)
+            ->action(__('notification.change_password.action'), route('change-password-show'));
     }
 
-    //    public function toAero(User $notifiable): AeroMessage
-    //    {
-    //        return new AeroMessage(
-    //            config('services.smsaero.sign'),
-    //            'Ваш код: '.$this->code,
-    //            $notifiable->phone->value()
-    //        );
-    //    }
+    public function toNutnetSms(): string
+    {
+        return __('notification.change_password.first_line').' '
+            .__('notification.change_password.second_line').$this->code.'. '
+            .__('notification.change_password.action').route('change-password-show');
+    }
 }

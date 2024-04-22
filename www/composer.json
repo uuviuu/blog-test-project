@@ -12,6 +12,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "nutnet/laravel-sms": "^0.11.0",
         "prettus/l5-repository": "^2.9"
     },
     "require-dev": {
