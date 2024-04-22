@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('password_codes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('code', 6);
+            $table->string('code', 4);
             $table->timestamps();
         });
     }

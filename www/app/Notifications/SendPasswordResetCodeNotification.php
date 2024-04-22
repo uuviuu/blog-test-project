@@ -32,13 +32,13 @@ class SendPasswordResetCodeNotification extends Notification
         return (new MailMessage)
             ->line(__('notification.change_password.first_line'))
             ->line(__('notification.change_password.second_line').$this->code)
-            ->action(__('notification.change_password.action'), route('change-password-show'));
+            ->action(__('notification.change_password.action'), route('changePasswordShow'));
     }
 
     public function toNutnetSms(): string
     {
         return __('notification.change_password.first_line').' '
             .__('notification.change_password.second_line').$this->code.'. '
-            .__('notification.change_password.action').route('change-password-show');
+            .__('notification.change_password.action').route('changePasswordShow');
     }
 }

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DTO\Auth\ChangePasswordDto;
 use App\DTO\Auth\LoginDto;
 use App\DTO\Auth\RegistrationDto;
 use App\DTO\Auth\ResetPasswordDto;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegistrationRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
@@ -14,6 +16,7 @@ use App\Services\User\AuthService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
@@ -65,13 +68,18 @@ class AuthController extends Controller
         return response()->json(status: 204);
     }
 
-    public function changePasswordShow()
+    public function changePasswordShow(): View
     {
-
+        return view('change-password');
     }
 
-    public function changePassword()
+    public function changePassword(ChangePasswordRequest $request): UserResource
     {
+        /** @var ChangePasswordDto $data */
+        $data = $request->dto($request->validated());
 
+        $user = $this->service->changePassword($data);
+
+        return UserResource::make($user);
     }
 }
