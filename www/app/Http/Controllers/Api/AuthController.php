@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\DTO\Auth\LoginDto;
 use App\DTO\Auth\RegistrationDto;
+use App\DTO\Auth\ResetPasswordDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegistrationRequest;
+use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Http\Resources\User\UserResource;
 use App\Services\User\AuthService;
-use Illuminate\Http\Response;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -44,10 +47,31 @@ class AuthController extends Controller
         return UserResource::make($user);
     }
 
-    public function logout(): Response
+    public function logout(): JsonResponse
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
 
-        return response(status: 204);
+        return response()->json(status: 204);
+    }
+
+    /** @throws Exception */
+    public function getPasswordResetCode(ResetPasswordRequest $request): JsonResponse
+    {
+        /** @var ResetPasswordDto $data */
+        $data = $request->dto($request->validated());
+
+        $this->service->getPasswordResetCode($data);
+
+        return response()->json(status: 204);
+    }
+
+    public function changePasswordShow()
+    {
+
+    }
+
+    public function changePassword()
+    {
+
     }
 }

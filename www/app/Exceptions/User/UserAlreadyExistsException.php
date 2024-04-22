@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions\Auth;
+namespace App\Exceptions\User;
 
 use App\Exceptions\AppHttpException as AppException;
 

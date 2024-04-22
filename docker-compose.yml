@@ -91,6 +91,15 @@ services:
 #      - ./db/mysql:/var/lib/mysql
 #      - ./db/dumps:/dumps
 #      - ./logs:/var/log/mysql/
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - blog-test-project
 
 networks:
   blog-test-project:

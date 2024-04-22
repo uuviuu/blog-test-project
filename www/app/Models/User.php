@@ -79,4 +79,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function findByEmailOrPhone(string $emailOrPhone): ?User
+    {
+        /** @var ?User $user */
+        $user = self::whereRaw('lower(?) = lower("email")', [$emailOrPhone])
+            ->orWhere('phone', $emailOrPhone)
+            ->first();
+
+        return $user;
+    }
 }
